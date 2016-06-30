@@ -14,7 +14,7 @@ compile.stderr.on("data", function (data) {
 // make a jar with an entry point specified in Manifest.txt
 setTimeout(function(){
   var makejar = require('child_process').spawn(
-    'jar', ['cfm', 'MyJar.jar', 'Manifest.txt', 'tokenizer/Tuple.class', 'tokenizer/ParserException.class', 'tokenizer/Tokenizer.class', 'tokenizer/Tuple.class', 'tokenizer/Tokenizer$Token.class', 'tokenizer/Tokenizer$TokenInfo.class', 'tokenizer/Test.class' ]
+    'jar', ['cfm', 'MyJar.jar', 'META-INF/MANIFEST.MF', 'tokenizer/Tuple.class', 'tokenizer/ParserException.class', 'tokenizer/Tokenizer.class', 'tokenizer/Tuple.class', 'tokenizer/Tokenizer$Token.class', 'tokenizer/Tokenizer$TokenInfo.class', 'tokenizer/Test.class' ]
   );
   makejar.stdout.on('data', function(data) {
       console.log(data.toString());
