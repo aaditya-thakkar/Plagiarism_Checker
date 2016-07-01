@@ -1,5 +1,8 @@
-var arg = "/home/aaditya/Desktop/new2.txt";
 
+var path = require('path');
+var appDir = path.dirname(require.main.filename).;
+var arg = appDir+"/new.txt"
+console.log("path is "+arg);
 // compile java files to make .class files
 var compile = require('child_process').spawn(
   'javac', ['tokenizer/Tuple.java', 'tokenizer/ParserException.java', 'tokenizer/Tokenizer.java', 'tokenizer/Test.java']
