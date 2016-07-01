@@ -1,8 +1,9 @@
 
 var path = require('path');
-var appDir = path.dirname(require.main.filename).;
-var arg = appDir+"/new.txt"
-console.log("path is "+arg);
+var appDir = path.dirname(require.main.filename);
+var arg = appDir+"/new.txt"  //change name of your test 1 files in src folder
+var arg1 = appDir+"/new2.txt"  //change name of your test 2 files in src folder
+console.log("path is "+arg1);
 // compile java files to make .class files
 var compile = require('child_process').spawn(
   'javac', ['tokenizer/Tuple.java', 'tokenizer/ParserException.java', 'tokenizer/Tokenizer.java', 'tokenizer/Test.java']
@@ -30,7 +31,7 @@ setTimeout(function(){
 // executing a jar file
 setTimeout(function(){
   var child = require('child_process').spawn(
-    'java', ['-jar', 'MyJar.jar', arg]
+    'java', ['-jar', 'MyJar.jar', arg, arg1]
   );
   child.stdout.on('data', function(data) {
       console.log(data.toString());
