@@ -16,7 +16,7 @@ public class Test
   	 File file[] = new File[FILENUM];
      file[0] = new File(args[0]);
      file[1] = new File(args[1]);
-     System.out.println(args[0]+" "+args[1]);
+//     System.out.println(args[0]+" "+args[1]);
   	 String[] lines = null;
   	 int x = 0;
   	 /*starting predefined n gram global, n=4*/
@@ -33,10 +33,11 @@ public class Test
   			 }
   		 }
   	 }
-
+     int vectorA[]= new int[3334];
+     int vectorB[]= new int[3334];
      for(int nfile=0;nfile<FILENUM;nfile++){
 
-         System.out.println("****************file "+nfile+"*******************");
+    //     System.out.println("****************file "+nfile+"*******************");
          ArrayList<Tuple>[] anagramfreq=new ArrayList[3334];
       	 for(int i=0;i<81;i++){
       		 anagramfreq[anagram[i]]=new ArrayList<Tuple>();
@@ -74,17 +75,17 @@ public class Test
           try
           {
               tokenizer.tokenize(removeComments(sb.toString()));
-
-              for (Tokenizer.Token tok : tokenizer.getTokens())
+              // Printing ...
+            /*  for (Tokenizer.Token tok : tokenizer.getTokens())
               {
             		 System.out.println("" + tok.token + " " + tok.sequence);
-              }
+              } */
 
               LinkedList<Tokenizer.Token> tokenval=tokenizer.getTokens();
               for(int j=0;j<tokenval.size()-3;j++){
                   //make ngram
               	  int ngram=tokenval.get(j).token*1000+tokenval.get(j+1).token*100+tokenval.get(j+2).token*10+tokenval.get(j+3).token;
-              	  System.out.println(ngram);
+              //	  System.out.println(ngram);
               	  Tuple tuple=new Tuple(1);
               	  int flag=0;
 
@@ -101,6 +102,14 @@ public class Test
               	  }
                   //updating frequency list completed...remove code if not needed
               }
+              for(int i=1111;i< 3333;i++){
+                for(int j=0;anagramfreq[i]!=null && j<anagramfreq[i].size() ;j++){
+                if(nfile==0)
+                  vectorA[i]= anagramfreq[i].get(j).frequency;
+                else
+                  vectorB[i]= anagramfreq[i].get(j).frequency;
+                  }
+              }
           }
           catch (ParserException e)
           {
@@ -108,10 +117,10 @@ public class Test
           }
 
      }
-
+    System.out.println(cosineSimilarity(vectorA,vectorB)*100);
    }
 
-   public static double cosineSimilarity(double[] vectorA, double[] vectorB) {
+   public static double cosineSimilarity(int[] vectorA, int[] vectorB) {
      double dotProduct = 0.0;
      double normA = 0.0;
      double normB = 0.0;
@@ -119,7 +128,7 @@ public class Test
         dotProduct += vectorA[i] * vectorB[i];
         normA += Math.pow(vectorA[i], 2);
         normB += Math.pow(vectorB[i], 2);
-     }   
+     }
      return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
    }
     public static String removeComments(String code) {
